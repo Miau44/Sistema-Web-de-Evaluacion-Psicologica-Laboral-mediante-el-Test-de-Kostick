@@ -5,6 +5,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 require __DIR__ . '/../includes/db.php';
 require __DIR__ . '/../includes/questions.php';
+require_once __DIR__ . '/../includes/view.php';
 require __DIR__ . '/../includes/positions.php';
 require_once __DIR__ . '/../includes/user_identity.php';
 
@@ -323,7 +324,7 @@ if (!isset($_SESSION['test_id'])) {
 
             <?php foreach ($preguntas as $q): ?>
                 <div class="question">
-                    <p><?php echo $q['id'] . '. A: ' . $q['a'] . ' | B: ' . $q['b']; ?></p>
+                    <p><?= e($q['id']) ?>. A: <?= e($q['a']) ?> | B: <?= e($q['b']) ?></p>
 
                     <div class="options">
                         <input type="radio" id="q<?= $q['id'] ?>a" name="q<?= $q['id'] ?>" value="A">

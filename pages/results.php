@@ -6,6 +6,7 @@ header('Content-Type: text/html; charset=UTF-8');
 require __DIR__ . '/../includes/db.php';
 require __DIR__ . '/../includes/questions.php';
 require __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/view.php';
 require __DIR__ . '/../includes/admin_auth.php';
 require __DIR__ . '/../includes/positions.php';
 require_once __DIR__ . '/../includes/user_identity.php';
@@ -821,7 +822,7 @@ $grupos = [
 ];
 
 foreach($grupos as $grupo => $letras): ?>
-    <h3><?= $grupo ?></h3>
+    <h3><?= e($grupo) ?></h3>
     <div class="fila-header">
         <div class="col factor">Factor</div>
         <div class="col bajo">Interpretacion Negativa</div>
@@ -835,16 +836,16 @@ foreach($grupos as $grupo => $letras): ?>
     ?>
     <div class="fila-factor">
     <div class="col factor">
-        <strong><?= $letra ?></strong><br>
-        <span><?= $info['nombre'] ?></span>
+        <strong><?= e($letra) ?></strong><br>
+        <span><?= e($info['nombre']) ?></span>
     </div>
 
     <!-- COLUMNA BAJO -->
     <div class="col bajo">
         <?php if ($valor >= 6): ?>
-            <?= $info['positivo2'] ?>
+            <?= e($info['positivo2']) ?>
         <?php elseif ($valor <= 3): ?>
-            <?= $info['negativo2'] ?>
+            <?= e($info['negativo2']) ?>
         <?php else: ?>
         Normal, Nada a resaltar
         <?php endif; ?>
@@ -861,9 +862,9 @@ foreach($grupos as $grupo => $letras): ?>
     <!-- COLUMNA ALTO -->
     <div class="col alto">
         <?php if ($valor >= 6): ?>
-            <?= $info['positivo1'] ?>
+            <?= e($info['positivo1']) ?>
         <?php elseif ($valor <= 3): ?>
-            <?= $info['negativo1'] ?>
+            <?= e($info['negativo1']) ?>
         <?php else: ?>
         Normal, Nada a resaltar
     <?php endif; ?>
