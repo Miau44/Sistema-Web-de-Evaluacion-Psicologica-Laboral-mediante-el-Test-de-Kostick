@@ -45,6 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         $stmt->execute([':username' => $username_sanitized]);
         $admin = $stmt->fetch();
+        $dummyPasswordHash = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi';
+        $storedPasswordHash = (string)($admin['password_hash'] ?? '');
+        $passwordHash = $storedPasswordHash !== '' ? $storedPasswordHash : $dummyPasswordHash;
+        $passwordIsValid = password_verify($password_input, $passwordHash);
 
         $is_active = false;
         if ($admin && isset($admin['is_active'])) {
@@ -55,8 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (
             $admin &&
             $is_active &&
-            isset($admin['password_hash']) &&
-            password_verify($password_input, (string)$admin['password_hash'])
+            $passwordIsValid
         ) {
             session_regenerate_id(true);
             $_SESSION['admin_authenticated'] = true;
