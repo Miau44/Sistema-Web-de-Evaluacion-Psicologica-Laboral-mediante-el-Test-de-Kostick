@@ -820,7 +820,10 @@ $exportUsersQuery = http_build_query(array_merge($baseQueryParams, ['export' => 
             <div class="title">Panel de Administracion</div>
             <div class="actions">
                 <span class="chip">Sesion: <strong><?= htmlspecialchars($adminUsername, ENT_QUOTES, 'UTF-8') ?></strong></span>
-                <a class="link-btn" href="logout.php">Cerrar sesion</a>
+                <form method="post" action="logout.php" class="inline-form">
+                    <?= csrf_field() ?>
+                    <button class="link-btn" type="submit">Cerrar sesion</button>
+                </form>
                 <a class="link-btn" href="../index.php">Volver al inicio</a>
             </div>
         </div>
