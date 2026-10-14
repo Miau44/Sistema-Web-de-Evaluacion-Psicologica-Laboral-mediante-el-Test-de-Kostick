@@ -160,25 +160,35 @@ if ($is_admin_view) {
 
     $test_id_for_view = (int)$_SESSION['test_id'];
 
-    $stmt = $conn->prepare("UPDATE tests SET end_datetime = ?, duration = ? WHERE id = ?");
-    $stmt->execute([
-        $end_datetime,
-        $duration,
-        $test_id_for_view
-    ]);
+    try {
+        $conn->beginTransaction();
 
-    $delete_stmt = $conn->prepare("DELETE FROM results WHERE test_id = ?");
-    $delete_stmt->execute([$test_id_for_view]);
+        $stmt = $conn->prepare("UPDATE tests SET end_datetime = ?, duration = ? WHERE id = ?");
+        $stmt->execute([$end_datetime, $duration, $test_id_for_view]);
 
-    foreach ($scores as $scale => $score) {
-        $level = $levels[$scale];
-        $stmt = $conn->prepare("INSERT INTO results (test_id, scale, score, level) VALUES (?, ?, ?, ?)");
-        $stmt->execute([
-            $test_id_for_view,
-            $scale,
-            (int)$score,
-            $level
-        ]);
+        $delete_stmt = $conn->prepare("DELETE FROM results WHERE test_id = ?");
+        $delete_stmt->execute([$test_id_for_view]);
+
+        foreach ($scores as $scale => $score) {
+            $level = $levels[$scale];
+            $stmt = $conn->prepare("INSERT INTO results (test_id, scale, score, level) VALUES (?, ?, ?, ?)");
+            $stmt->execute([
+                $test_id_for_view,
+                $scale,
+                (int)$score,
+                $level
+            ]);
+        }
+
+        $conn->commit();
+    } catch (Throwable $e) {
+        if ($conn->inTransaction()) {
+            $conn->rollBack();
+        }
+
+        error_log('[KOSTICK] Error al guardar resultados del test: ' . $e->getMessage());
+        http_response_code(500);
+        exit('No se pudieron guardar los resultados. Inténtelo más tarde.');
     }
 
     $display_name = build_user_full_name(
