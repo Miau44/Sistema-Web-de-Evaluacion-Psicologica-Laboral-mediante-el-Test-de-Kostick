@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 function verify_turnstile_token(string $token, string $remoteIp = ''): bool
 {
-    if (TURNSTILE_SECRET_KEY === '') {
+    $token = trim($token);
+    if ($token === '' || TURNSTILE_SECRET_KEY === '') {
         return false;
     }
 
