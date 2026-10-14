@@ -36,14 +36,14 @@ try {
         'exists' => false,
         'formatted' => $formattedCi,
         'message' => 'CI VALIDO: ' . $formattedCi,
-    ], JSON_UNESCAPED_UNICODE);
+    ], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
 } catch (InvalidArgumentException $e) {
     echo json_encode([
         'valid' => false,
         'exists' => false,
         'formatted' => '',
         'message' => $e->getMessage(),
-    ], JSON_UNESCAPED_UNICODE);
+    ], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
 } catch (Throwable $e) {
     http_response_code(500);
     echo json_encode([
@@ -51,6 +51,6 @@ try {
         'exists' => false,
         'formatted' => '',
         'message' => 'NO SE PUDO VALIDAR EL CI EN ESTE MOMENTO.',
-    ], JSON_UNESCAPED_UNICODE);
+    ], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
 }
 ?>
