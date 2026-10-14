@@ -4,6 +4,19 @@ declare(strict_types=1);
 require_once __DIR__ . '/../includes/session.php';
 app_start_session();
 header('Content-Type: application/json; charset=UTF-8');
+header('Cache-Control: no-store, private');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    header('Allow: GET');
+    echo json_encode([
+        'valid' => false,
+        'exists' => false,
+        'formatted' => '',
+        'message' => 'Método no permitido.',
+    ], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+    exit;
+}
 
 require __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/user_identity.php';
