@@ -51,6 +51,6 @@ function verify_turnstile_token(string $token, string $remoteIp = ''): bool
     }
 
     $decoded = json_decode($responseBody, true);
-    return is_array($decoded) && !empty($decoded['success']);
+    return is_array($decoded) && ($decoded['success'] ?? null) === true;
 }
 
