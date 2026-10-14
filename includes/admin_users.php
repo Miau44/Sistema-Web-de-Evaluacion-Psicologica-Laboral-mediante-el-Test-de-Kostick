@@ -10,14 +10,14 @@ function get_admin_user_listing_filters(array $source): array
     $allowedDates = ['', 'today', '7days', 'month', 'custom'];
     $allowedSort = ['u.id', 'u.name', 'full_name', 't.start_datetime', 't.end_datetime'];
 
-    $search = trim((string)($source['search'] ?? ''));
+    $search = mb_substr(trim((string)($source['search'] ?? '')), 0, 120, 'UTF-8');
     $filterDate = (string)($source['filter_date'] ?? '');
     $filterResult = (string)($source['filter_result'] ?? '');
     $filterStatus = (string)($source['filter_status'] ?? '');
     $sortBy = (string)($source['sort_by'] ?? 'u.id');
     $sortOrder = strtoupper((string)($source['sort_order'] ?? 'DESC'));
     $page = max(1, (int)($source['page'] ?? 1));
-    $perPage = max(1, (int)($source['per_page'] ?? 20));
+    $perPage = min(100, max(1, (int)($source['per_page'] ?? 20)));
     $startDate = trim((string)($source['start_date'] ?? ''));
     $endDate = trim((string)($source['end_date'] ?? ''));
     $export = (string)($source['export'] ?? '');
