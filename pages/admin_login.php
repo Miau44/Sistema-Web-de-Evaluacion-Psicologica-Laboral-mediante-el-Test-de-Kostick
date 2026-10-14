@@ -61,6 +61,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $is_active &&
             $passwordIsValid
         ) {
+            if (password_needs_rehash($storedPasswordHash, PASSWORD_DEFAULT)) {
+                $updatedHash = password_hash($password_input, PASSWORD_DEFAULT);
+                $rehashStmt = $conn->prepare(
+                    'UPDATE admin_users SET password_hash = :password_hash WHERE id = :id'
+                );
+                $rehashStmt->execute([
+                    ':password_hash' => $updatedHash,
+                    ':id' => (int)$admin['id'],
+                ]);
+            }
+
             session_regenerate_id(true);
             $_SESSION['admin_authenticated'] = true;
             $_SESSION['admin_user_id'] = (int)$admin['id'];
