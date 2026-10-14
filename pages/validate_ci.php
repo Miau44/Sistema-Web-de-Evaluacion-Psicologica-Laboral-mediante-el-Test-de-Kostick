@@ -45,6 +45,7 @@ try {
         'message' => $e->getMessage(),
     ], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
 } catch (Throwable $e) {
+    error_log('[KOSTICK] CI validation failed: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode([
         'valid' => false,
