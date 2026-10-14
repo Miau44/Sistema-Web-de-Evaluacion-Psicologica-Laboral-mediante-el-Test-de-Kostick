@@ -22,6 +22,7 @@ function verify_turnstile_token(string $token, string $remoteIp = ''): bool
             CURLOPT_POSTFIELDS => $postData,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
+            CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 10,
         ]);
         $responseBody = curl_exec($ch);
