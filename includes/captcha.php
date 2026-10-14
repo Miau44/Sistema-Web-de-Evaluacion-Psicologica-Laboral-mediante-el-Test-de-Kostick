@@ -15,6 +15,7 @@ function verify_turnstile_token(string $token, string $remoteIp = ''): bool
     ]);
 
     $responseBody = false;
+    $httpStatus = 0;
     if (function_exists('curl_init')) {
         $ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
         curl_setopt_array($ch, [
@@ -26,6 +27,7 @@ function verify_turnstile_token(string $token, string $remoteIp = ''): bool
             CURLOPT_TIMEOUT => 10,
         ]);
         $responseBody = curl_exec($ch);
+        $httpStatus = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
     } else {
         $context = stream_context_create([
@@ -37,9 +39,14 @@ function verify_turnstile_token(string $token, string $remoteIp = ''): bool
             ],
         ]);
         $responseBody = @file_get_contents('https://challenges.cloudflare.com/turnstile/v0/siteverify', false, $context);
+        foreach ($http_response_header ?? [] as $header) {
+            if (preg_match('/^HTTP\/\S+\s+(\d{3})\b/', $header, $matches)) {
+                $httpStatus = (int)$matches[1];
+            }
+        }
     }
 
-    if ($responseBody === false) {
+    if ($responseBody === false || $httpStatus < 200 || $httpStatus >= 300) {
         return false;
     }
 
