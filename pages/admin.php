@@ -6,12 +6,18 @@ header('Content-Type: text/html; charset=UTF-8');
 require __DIR__ . '/../includes/db.php';
 require __DIR__ . '/../includes/access_codes.php';
 require __DIR__ . '/../includes/admin_auth.php';
+require_once __DIR__ . '/../includes/csrf.php';
 require __DIR__ . '/../includes/positions.php';
 require __DIR__ . '/../includes/admin_users.php';
 require __DIR__ . '/../includes/xlsx_export.php';
 require_once __DIR__ . '/../includes/user_identity.php';
 
 require_admin_auth();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_request_is_valid()) {
+    http_response_code(400);
+    exit('La solicitud expiró o no es válida. Recargue la página e inténtelo nuevamente.');
+}
+
 ensure_access_codes_schema($conn);
 ensure_positions_schema($conn);
 ensure_user_identity_schema($conn);
@@ -833,6 +839,7 @@ $exportUsersQuery = http_build_query(array_merge($baseQueryParams, ['export' => 
                 <p>Zona horaria aplicada: <strong><?= htmlspecialchars($accessCodeTimezoneLabel, ENT_QUOTES, 'UTF-8') ?></strong></p>
 
                 <form id="access-code-form" method="post" action="admin.php">
+                    <?= csrf_field() ?>
                     <input type="hidden" name="action" value="generate_code">
                     <div class="form-grid">
                         <div class="field">
@@ -875,6 +882,7 @@ $exportUsersQuery = http_build_query(array_merge($baseQueryParams, ['export' => 
                 <p>Crea nuevos administradores con contraseñas seguras.</p>
 
                 <form method="post" action="admin.php">
+                    <?= csrf_field() ?>
                     <input type="hidden" name="action" value="create_admin">
                     <div class="form-grid">
                         <div class="field">
@@ -915,6 +923,7 @@ $exportUsersQuery = http_build_query(array_merge($baseQueryParams, ['export' => 
             </div>
 
             <form method="post" action="admin.php<?= $positionFormMode === 'edit' ? '?edit_position=' . $positionFormId : '' ?>">
+                <?= csrf_field() ?>
                 <input type="hidden" name="action" value="<?= htmlspecialchars($positionFormAction, ENT_QUOTES, 'UTF-8') ?>">
                 <?php if ($positionFormMode === 'edit'): ?>
                     <input type="hidden" name="position_id" value="<?= $positionFormId ?>">
@@ -986,6 +995,7 @@ $exportUsersQuery = http_build_query(array_merge($baseQueryParams, ['export' => 
                                                 Editar
                                             </a>
                                             <form class="inline-form" method="post" action="admin.php">
+                                                <?= csrf_field() ?>
                                                 <input type="hidden" name="action" value="toggle_position">
                                                 <input type="hidden" name="position_id" value="<?= (int)$position['id'] ?>">
                                                 <input type="hidden" name="next_state" value="<?= $isEnabled ? 'disable' : 'enable' ?>">
@@ -1031,6 +1041,7 @@ $exportUsersQuery = http_build_query(array_merge($baseQueryParams, ['export' => 
                                             <span class="disabled-note">Sesion actual (no se puede eliminar)</span>
                                         <?php else: ?>
                                             <form class="inline-form" method="post" action="admin.php" onsubmit="return confirm('ELIMINAR ESTE ADMINISTRADOR?');">
+                                                <?= csrf_field() ?>
                                                 <input type="hidden" name="action" value="delete_admin">
                                                 <input type="hidden" name="admin_id" value="<?= (int)$admin['id'] ?>">
                                                 <button class="btn-danger" type="submit">Eliminar administrador</button>
