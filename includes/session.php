@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 function app_start_session(): void
 {
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: DENY');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+
     if (session_status() === PHP_SESSION_ACTIVE) {
         return;
     }
