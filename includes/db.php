@@ -37,6 +37,8 @@ try {
     ]);
     $conn->exec("SET time_zone = '+00:00'");
 } catch (PDOException $e) {
-    die('Database connection failed: ' . $e->getMessage());
+    error_log('[KOSTICK] Database connection failed: ' . $e->getMessage());
+    http_response_code(500);
+    exit('No se pudo conectar con la base de datos. Inténtelo más tarde.');
 }
 ?>
