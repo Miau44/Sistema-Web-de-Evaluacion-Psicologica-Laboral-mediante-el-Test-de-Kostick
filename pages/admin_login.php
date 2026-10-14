@@ -162,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             id="password"
                             name="password"
                             class="login-input"
+                            maxlength="4096"
                             autocomplete="current-password"
                             placeholder="Ingresa tu contraseña"
                             aria-invalid="<?= $error !== '' ? 'true' : 'false' ?>"
