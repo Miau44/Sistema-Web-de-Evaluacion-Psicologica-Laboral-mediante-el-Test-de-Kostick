@@ -5,6 +5,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 require __DIR__ . '/../includes/db.php';
 require __DIR__ . '/../includes/admin_auth.php';
+require_once __DIR__ . '/../includes/csrf.php';
 
 if (is_admin_authenticated()) {
     header('Location: admin.php');
@@ -17,6 +18,11 @@ $username_value = '';
 
 if (isset($_GET['logout']) && $_GET['logout'] === '1') {
     $info = 'Sesión cerrada correctamente.';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_request_is_valid()) {
+    http_response_code(400);
+    exit('La sesión del formulario expiró. Recargue la página e inténtelo nuevamente.');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -113,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
                 <form class="login-form" method="post" action="admin_login.php">
+                    <?= csrf_field() ?>
                     <label for="username">Usuario</label>
                     <input
                         type="text"
