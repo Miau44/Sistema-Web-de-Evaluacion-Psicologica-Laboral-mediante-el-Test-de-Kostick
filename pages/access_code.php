@@ -5,6 +5,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 require __DIR__ . '/../includes/db.php';
 require __DIR__ . '/../includes/captcha.php';
+require_once __DIR__ . '/../includes/csrf.php';
 require __DIR__ . '/../includes/access_codes.php';
 require __DIR__ . '/../includes/positions.php';
 require_once __DIR__ . '/../includes/user_identity.php';
@@ -45,6 +46,11 @@ $visibleAccessCode = null;
 $visibleAccessCodeStatus = 'not_found';
 $visibleAccessCodeMessage = '';
 $showVisibleAccessCode = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_request_is_valid()) {
+    http_response_code(400);
+    exit('La solicitud expiró o no es válida. Regrese al inicio e inténtelo nuevamente.');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'captcha') {
     $captchaToken = $_POST['cf-turnstile-response'] ?? '';
@@ -436,6 +442,7 @@ $visibleAccessCodeValidityMessage = $showVisibleAccessCode
             </script>
         <?php elseif ($showVisibleAccessCode): ?>
             <form method="post" action="access_code.php">
+                <?= csrf_field() ?>
                 <input type="hidden" name="step" value="access_code">
                 <label for="access_code">Codigo de acceso</label>
                 <input

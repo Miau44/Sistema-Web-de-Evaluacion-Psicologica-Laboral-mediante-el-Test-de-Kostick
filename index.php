@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/session.php';
 app_start_session();
+require_once __DIR__ . '/includes/csrf.php';
 require __DIR__ . '/includes/db.php';
 require __DIR__ . '/includes/positions.php';
 require __DIR__ . '/includes/user_identity.php';
@@ -60,6 +61,7 @@ unset($_SESSION['form_error'], $_SESSION['form_old']);
         <?php endif; ?>
 
         <form id="registration-form" action="pages/access_code.php" method="post" novalidate>
+            <?= csrf_field() ?>
             <input type="hidden" name="step" value="captcha">
 
             <div class="form-row surname-row">
