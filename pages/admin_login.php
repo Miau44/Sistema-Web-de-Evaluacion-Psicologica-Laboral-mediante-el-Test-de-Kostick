@@ -32,7 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $username_sanitized = preg_replace('/[^a-zA-Z0-9._-]/', '', $username_input) ?? '';
 
-    if ($username_input === '' || $password_input === '') {
+    if (strlen($username_input) > 100 || strlen($password_input) > 4096) {
+        $error = 'Las credenciales superan el tamaño permitido.';
+    } elseif ($username_input === '' || $password_input === '') {
         $error = 'Debe ingresar usuario y contraseña.';
     } elseif ($username_sanitized !== $username_input) {
         $error = 'Formato de usuario inválido.';
