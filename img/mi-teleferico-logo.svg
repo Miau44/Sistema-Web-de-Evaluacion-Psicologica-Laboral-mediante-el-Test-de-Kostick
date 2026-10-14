@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 554 554" role="img" aria-labelledby="title">
+  <title id="title">Mi Teleférico · Uniendo nuestras vidas</title>
+  <defs>
+    <linearGradient id="ring" x1="104" y1="103" x2="438" y2="436" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c92e73"/><stop offset=".2" stop-color="#ee1338"/><stop offset=".38" stop-color="#f58200"/><stop offset=".54" stop-color="#f1db00"/><stop offset=".7" stop-color="#00a849"/><stop offset=".84" stop-color="#00a8d2"/><stop offset="1" stop-color="#703b90"/>
+    </linearGradient>
+  </defs>
+  <circle cx="277" cy="221" r="190" fill="none" stroke="url(#ring)" stroke-width="22" stroke-dasharray="90 9 58 9 69 9 65 9 61 9 66 9 66 9 64 9" transform="rotate(-90 277 221)"/>
+  <g fill="none" stroke="#0089be" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke-width="6">
+      <path d="M166 132h222M153 146h248M163 160h228M177 174h200"/>
+      <path d="M153 146h-8a8 8 0 0 0-8 8v5h270v-5a8 8 0 0 0-8-8h-8M177 174h22q7 0 7 8v14h18v-14q0-8 8-8h14q8 0 8 8v14h18v-14q0-8 7-8h28"/>
+      <path d="M211 198h21v166l8 7V207h12v172l8 6V207h12v172l8-6V207h12v164l8-7V198h21"/>
+      <path d="M153 146a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM401 146a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/>
+    </g>
+    <g fill="#0089be" stroke="none" font-family="Arial, sans-serif" text-anchor="middle">
+      <text x="277" y="490" font-size="44" font-weight="500" letter-spacing="-2">Mi Teleférico</text>
+      <text x="277" y="519" font-size="17" font-weight="700" letter-spacing="4.1">UNIENDO NUESTRAS VIDAS</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1000" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#71bce9"/><stop offset=".45" stop-color="#b6d9eb"/><stop offset="1" stop-color="#f3c993"/></linearGradient>
+    <linearGradient id="city" x2="0" y2="1"><stop stop-color="#d9a875"/><stop offset="1" stop-color="#87523f"/></linearGradient>
+    <linearGradient id="cabin" x2="0" y2="1"><stop stop-color="#54baf0"/><stop offset="1" stop-color="#0567a9"/></linearGradient>
+    <linearGradient id="brandveil" x2="0" y2="1"><stop stop-color="#064781" stop-opacity=".93"/><stop offset=".42" stop-color="#07549a" stop-opacity=".88"/><stop offset=".64" stop-color="#07549a" stop-opacity=".45"/><stop offset="1" stop-color="#07549a" stop-opacity="0"/></linearGradient>
+    <linearGradient id="brandring" x1="180" y1="70" x2="420" y2="310" gradientUnits="userSpaceOnUse"><stop stop-color="#cf377b"/><stop offset=".2" stop-color="#ec2543"/><stop offset=".39" stop-color="#f48a15"/><stop offset=".55" stop-color="#f2dc16"/><stop offset=".72" stop-color="#12a958"/><stop offset=".86" stop-color="#13b1d2"/><stop offset="1" stop-color="#834693"/></linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h600v1000H0z"/>
+  <path fill="#f4efe5" d="m0 586 111-133 53 56 80-111 50 54 115-158 54 63 137-155v340L0 717z"/>
+  <path fill="#c9d8dd" d="m0 641 111-133 53 56 80-111 50 54 115-158 54 63 137-155v283L0 760z" opacity=".64"/>
+  <path fill="#597c8e" d="m0 666 111-124 51 55 82-105 50 49 116-144 53 54 137-122v278L0 820z"/>
+  <path fill="#244d69" d="m0 737 118-94 68 53 89-68 72 55 94-77 69 43 90-48v399H0z"/>
+  <path fill="#d4a77d" d="M0 708q96-53 183-17t173-11q133-69 244-24v344H0z"/>
+  <path fill="#bf8c68" d="M0 758q83-64 178-36t177-22q141-54 245-10v310H0z"/>
+  <path fill="url(#city)" d="M0 791q94-47 177-10t177-32q136-61 246-18v269H0z"/>
+  <g fill="#784e43" opacity=".91">
+    <path d="M0 808h28v32H0zm34-14h25v46H34zm30 18h32v32H64zm39-31h20v63h-20zm25 14h33v49h-33zm37-24h24v73h-24zm30 31h34v42h-34zm40-25h25v67h-25zm30 15h37v52h-37zm42-24h21v76h-21zm27 15h33v61h-33zm39-28h27v89h-27zm35 22h30v67h-30zm37-35h25v102h-25zm31 21h34v81h-34zm40-36h28v117h-28zm34 33h29v84h-29zm35-20h24v104h-24zm31-24h30v128h-30zm37 36h23v92h-23z"/>
+    <path d="M0 876h600v124H0z" fill="#5c403a" opacity=".48"/>
+  </g>
+  <g fill="#e8c9a4" opacity=".9">
+    <path d="M10 815h7v8h-7zm38-7h7v9h-7zm57-15h7v10h-7zm43 23h8v9h-8zm41-33h8v10h-8zm52 36h8v9h-8zm38-25h8v10h-8zm67 3h8v9h-8zm49-24h8v9h-8zm55 21h8v9h-8zm42-42h8v10h-8zm44 30h8v9h-8zm45-37h8v10h-8zm-555 91h8v10h-8zm74-8h8v10h-8zm112 12h8v10h-8zm78-4h8v10h-8zm88-10h8v10h-8zm92 9h8v10h-8z"/>
+  </g>
+  <path d="M-25 547 629 316" fill="none" stroke="#183e5d" stroke-width="7"/>
+  <path d="M-25 554 629 323" fill="none" stroke="#c6d4da" stroke-width="2"/>
+  <g stroke="#183e5d" stroke-width="8" fill="none">
+    <path d="m168 840 61-319m-83 319 82-319m243 126 26-212m-44 218 26-212"/>
+    <path d="M143 521h101m199-92h83" stroke-width="14"/>
+  </g>
+  <g fill="url(#cabin)" stroke="#0b4f7f" stroke-width="5">
+    <path d="M368 600h79l-8 79q-2 20-31 20t-32-20z"/>
+    <path d="M80 735h57l-6 57q-2 16-22 16t-23-16z"/>
+    <path d="M463 486h43l-5 47q-2 13-17 13t-17-13z"/>
+  </g>
+  <g fill="none" stroke="#e8f7ff" stroke-width="3" opacity=".85">
+    <path d="M383 610h48m-333 135h31m342-251h25"/>
+  </g>
+  <path fill="url(#brandveil)" d="M0 0h600v600H0z"/>
+  <circle cx="300" cy="190" r="111" fill="none" stroke="url(#brandring)" stroke-width="13" stroke-dasharray="28 3.5"/>
+  <g transform="translate(207 111) scale(.54)" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 15h277M17 35h311M27 54h291M44 72h256M63 91h218M88 110h168"/>
+    <path d="M19 35h138q13 0 13 13v221M326 35H188q-13 0-13 13v221"/>
+    <path d="M33 55h112q11 0 11 12v181M312 55H200q-11 0-11 12v181"/>
+    <path d="M50 74h89q9 0 9 10v145M295 74h-89q-9 0-9 10v145"/>
+    <path d="M67 94h70v28l14 13v95M278 94h-70v28l-14 13v95M159 113h27M166 135v99M179 135v99"/>
+    <path d="M147 113q0-12 12-12h29q12 0 12 12v16q0 8-8 8h-10v-15h-17v15h-10q-8 0-8-8z"/>
+  </g>
+  <g fill="#fff" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="300" y="347" font-size="42" font-weight="500" letter-spacing="-1.8">Mi Teleférico</text>
+    <text x="300" y="374" font-size="13" font-weight="700" letter-spacing="3.6">UNIENDO NUESTRAS VIDAS</text>
+  </g>
+  <g>
+    <rect x="174" y="410" width="42" height="4" fill="#e92c41"/><rect x="220" y="410" width="42" height="4" fill="#f58022"/>
+    <rect x="266" y="410" width="42" height="4" fill="#ffd21a"/><rect x="312" y="410" width="42" height="4" fill="#00a75a"/>
+    <rect x="358" y="410" width="42" height="4" fill="#10a6d4"/><rect x="404" y="410" width="22" height="4" fill="#a74391"/>
+  </g>
+  <g fill="#fff" font-family="Arial, sans-serif" text-anchor="middle" letter-spacing="6">
+    <text x="300" y="454" font-size="13">MÁS QUE TRANSPORTE</text>
+    <text x="300" y="480" font-size="13">UNIMOS PERSONAS</text>
+  </g>
+</svg>

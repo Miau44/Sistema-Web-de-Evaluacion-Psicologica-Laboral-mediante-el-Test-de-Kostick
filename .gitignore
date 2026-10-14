@@ -1,0 +1,10 @@
+﻿# Local configuration
+.env
+.env.*
+!.env.example
+
+# Local and generated files
+*.log
+*.cache
+.DS_Store
+Thumbs.db
