@@ -7,6 +7,7 @@ function app_start_session(): void
     header('X-Frame-Options: DENY');
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+    header('Cache-Control: no-store, private');
 
     if (session_status() === PHP_SESSION_ACTIVE) {
         return;
