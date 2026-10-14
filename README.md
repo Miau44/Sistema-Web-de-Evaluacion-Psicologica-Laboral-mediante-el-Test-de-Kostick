@@ -23,6 +23,8 @@ Aplicación web en PHP para registrar participantes, aplicar el Test de Kostick 
 4. Configure `TURNSTILE_SITE_KEY` y `TURNSTILE_SECRET_KEY` con claves propias de Cloudflare Turnstile.
 5. Sirva la carpeta del proyecto con Apache/PHP y abra `index.php`.
 
+La aplicación lee estas opciones desde el entorno del proceso PHP; no carga archivos `.env` automáticamente. Si TLS termina en un proxy y PHP recibe la conexión como HTTP, configure `SESSION_COOKIE_SECURE=1` para conservar el atributo `Secure` en la cookie de sesión.
+
 La aplicación crea o actualiza algunas tablas auxiliares al ejecutarse; el usuario de base de datos debe tener permisos para esos cambios.
 
 ## Estructura
