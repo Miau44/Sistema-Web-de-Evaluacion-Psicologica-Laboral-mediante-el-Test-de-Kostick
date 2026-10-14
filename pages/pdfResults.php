@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../includes/view.php'; ?>
 <html>
 <head>
 <style>
@@ -14,8 +15,8 @@ h1 { text-align:center; font-size:18px; margin-bottom:10px; }
 
 <h1>INFORME – TEST DE KOSTICK</h1>
 
-<p><strong>Nombre completo:</strong> <?= $nombreMostrado ?></p>
-<p><strong>Edad:</strong> <?= $edad ?></p>
+<p><strong>Nombre completo:</strong> <?= e($nombreMostrado) ?></p>
+<p><strong>Edad:</strong> <?= e($edad) ?></p>
 <p><strong>Profesión:</strong> <?= $profesion ?></p>
 <p><strong>Fecha:</strong> <?= date('d/m/Y') ?></p>
 
@@ -32,14 +33,14 @@ evaluando rasgos de productividad, estilo de trabajo, adaptación y dinámicas s
 
 <tr>
 <td>Grado de Energía</td>
-<td><?= $energia ?></td>
-<td><?= interpretacion($energia) ?></td>
+<td><?= e($energia) ?></td>
+<td><?= e(interpretacion($energia)) ?></td>
 </tr>
 
 <tr>
 <td>Liderazgo</td>
-<td><?= $liderazgo ?></td>
-<td><?= interpretacion($liderazgo) ?></td>
+<td><?= e($liderazgo) ?></td>
+<td><?= e(interpretacion($liderazgo)) ?></td>
 </tr>
 
 <!-- Agregar el resto -->
@@ -47,7 +48,7 @@ evaluando rasgos de productividad, estilo de trabajo, adaptación y dinámicas s
 
 <div class="section-title">Conclusiones</div>
 <p>
-En general, el evaluado muestra un perfil <?= resumen_final($scores) ?>.
+En general, el evaluado muestra un perfil <?= e(resumen_final($scores)) ?>.
 </p>
 
 </body>
