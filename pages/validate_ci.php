@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-session_start();
+require_once __DIR__ . '/../includes/session.php';
+app_start_session();
 header('Content-Type: application/json; charset=UTF-8');
 
 require __DIR__ . '/../includes/db.php';

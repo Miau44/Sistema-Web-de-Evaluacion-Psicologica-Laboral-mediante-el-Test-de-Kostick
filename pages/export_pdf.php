@@ -6,7 +6,8 @@ require_once __DIR__ . '/../dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-session_start();
+require_once __DIR__ . '/../includes/session.php';
+app_start_session();
 require __DIR__ . '/../includes/db.php';
 require __DIR__ . '/../includes/admin_auth.php';
 require __DIR__ . '/../includes/positions.php';

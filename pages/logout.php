@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/session.php';
+app_start_session();
 
 require __DIR__ . '/../includes/admin_auth.php';
 
