@@ -1,39 +1,44 @@
-﻿# Sistema Web de Evaluación Psicológica Laboral mediante el Test de Kostick
+# Sistema Web de Evaluación Psicológica Laboral mediante el Test de Kostick
 
-Aplicación web en PHP para registrar participantes, aplicar el Test de Kostick y consultar resultados. Incluye administración de puestos y códigos de acceso, exportación a PDF y Excel, y validación CAPTCHA con Cloudflare Turnstile.
+Aplicación web en PHP para registrar participantes, aplicar el Test de Kostick y consultar resultados. Incluye administración de puestos y códigos de acceso, exportación de resultados a PDF y Excel, y validación CAPTCHA mediante Cloudflare Turnstile.
 
-## Tecnologías
+## Funcionalidades
 
-- PHP nativo y PDO.
-- MySQL/MariaDB en la configuración actual de `includes/db.php`.
-- HTML, CSS y JavaScript sin proceso de compilación.
-- Dompdf incluido en `dompdf/` para generar PDF.
+- Registro de participantes y acceso a la evaluación mediante códigos.
+- Aplicación del cuestionario y consulta de resultados.
+- Inicio de sesión administrativo y gestión de puestos y códigos de acceso.
+- Exportación de resultados a PDF y Excel.
+- Protección de formularios con tokens CSRF y CAPTCHA Turnstile.
 
 ## Requisitos
 
-- PHP 8.1 o posterior con `pdo_mysql`, `mbstring`, `dom` y `xml`.
-- MySQL o MariaDB.
-- Servidor web Apache o equivalente.
+- PHP 8.1 o posterior, con las extensiones `pdo_mysql`, `mbstring`, `dom` y `xml` para la configuración MySQL y la generación de PDF.
+- MySQL/MariaDB o PostgreSQL, según el esquema que se utilice.
+- Apache u otro servidor web compatible con PHP.
 
-## Configuración local
+## Instalación y configuración
 
-1. Copie `.env.example` como referencia para configurar las variables de entorno del servidor. No suba `.env` ni credenciales al repositorio.
-2. Cree la base de datos e importe `database/kostick_db.sql`.
-3. Configure `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` y `DB_PASS`.
-4. Configure `TURNSTILE_SITE_KEY` y `TURNSTILE_SECRET_KEY` con claves propias de Cloudflare Turnstile.
-5. Sirva la carpeta del proyecto con Apache/PHP y abra `index.php`.
+1. Coloca o clona el proyecto en el directorio publicado por tu servidor web.
+2. Crea una base de datos e importa el esquema correspondiente desde `database/`:
+   - `kostick_db.sql` para MySQL/MariaDB.
+   - `kostick_db_postgres.sql` para PostgreSQL.
+3. Define en el entorno del proceso PHP los datos de conexión: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` y `DB_PASS`.
+4. Define `TURNSTILE_SITE_KEY` y `TURNSTILE_SECRET_KEY` con las claves de tu sitio de Cloudflare Turnstile.
+5. Abre `index.php` desde el servidor web para acceder al formulario de registro.
 
-La aplicación lee estas opciones desde el entorno del proceso PHP; no carga archivos `.env` automáticamente. Si TLS termina en un proxy y PHP recibe la conexión como HTTP, configure `SESSION_COOKIE_SECURE=1` para conservar el atributo `Secure` en la cookie de sesión.
+`.env.example` enumera variables de referencia, pero la aplicación no carga archivos `.env` automáticamente. No guardes credenciales reales en el repositorio. Si TLS termina en un proxy y PHP recibe la conexión como HTTP, configura `SESSION_COOKIE_SECURE=1` para conservar el atributo `Secure` en la cookie de sesión.
 
-La aplicación crea o actualiza algunas tablas auxiliares al ejecutarse; el usuario de base de datos debe tener permisos para esos cambios.
+La aplicación puede crear o actualizar tablas auxiliares durante la ejecución. El usuario de base de datos necesita permisos para esos cambios. La administración se accede desde `pages/admin_login.php`; las credenciales administrativas deben configurarse de acuerdo con la lógica de autenticación del proyecto y no se proporcionan credenciales predeterminadas en este README.
 
-## Estructura
+## Estructura del proyecto
 
 - `index.php`: formulario de registro.
-- `includes/`: conexión, autenticación, validaciones y lógica compartida.
-- `pages/`: test, administración, resultados y exportaciones.
-- `database/`: esquemas SQL disponibles.
-- `dompdf/`: dependencia para los reportes PDF.
-- `css/`, `js/`, `img/`: recursos de interfaz.
+- `pages/`: evaluación, autenticación administrativa, resultados y exportaciones.
+- `includes/`: conexión a base de datos, sesiones, autenticación, validaciones y lógica compartida.
+- `database/`: esquemas para MySQL/MariaDB y PostgreSQL.
+- `css/`, `js/`, `img/`: estilos, scripts y recursos visuales.
+- `dompdf/`: biblioteca Dompdf utilizada para generar PDF.
 
-No se incluye un archivo `.env` con secretos. `.env.example` documenta los nombres de configuración esperados.
+## Configuración sensible
+
+No se incluyen secretos ni un archivo `.env` operativo. Mantén las claves de Turnstile, credenciales de base de datos y cualquier configuración del servidor fuera del control de versiones.
